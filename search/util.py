@@ -84,11 +84,11 @@ class PriorityQueue:
 
 class PriorityQueueWithFunction(PriorityQueue):
     """
-  Implements a priority queue with the same push/pop signature of the
-  Queue and the Stack classes. This is designed for drop-in replacement for
-  those two classes. The caller has to provide a priority function, which
-  extracts each item's priority.
-  """
+    Implements a priority queue with the same push/pop signature of the
+    Queue and the Stack classes. This is designed for drop-in replacement for
+    those two classes. The caller has to provide a priority function, which
+    extracts each item's priority.
+    """
 
     def __init__(self, priorityFunction):
         "priorityFunction (item) -> priority"
