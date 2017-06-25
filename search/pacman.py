@@ -48,18 +48,18 @@ import sys, types, time, random, os
 
 class GameState:
     """
-  A GameState specifies the full game state, including the food, capsules,
-  agent configurations and score changes.
+    A GameState specifies the full game state, including the food, capsules,
+    agent configurations and score changes.
 
-  GameStates are used by the Game object to capture the actual state of the game and
-  can be used by agents to reason about the game.
+    GameStates are used by the Game object to capture the actual state of the game and
+    can be used by agents to reason about the game.
 
-  Much of the information in a GameState is stored in a GameStateData object.  We
-  strongly suggest that you access that data via the accessor methods below rather
-  than referring to the GameStateData object directly.
+    Much of the information in a GameState is stored in a GameStateData object.  We
+    strongly suggest that you access that data via the accessor methods below rather
+    than referring to the GameStateData object directly.
 
-  Note that in classic Pacman, Pacman is always agent 0.
-  """
+    Note that in classic Pacman, Pacman is always agent 0.
+    """
 
     ####################################################
     # Accessor methods: use these to access state data #
@@ -77,8 +77,8 @@ class GameState:
 
     def getLegalActions(self, agentIndex=0):
         """
-    Returns the legal actions for the agent specified.
-    """
+        Returns the legal actions for the agent specified.
+        """
         GameState.explored.add(self)
         if self.isWin() or self.isLose(): return []
 
@@ -89,8 +89,8 @@ class GameState:
 
     def generateSuccessor(self, agentIndex, action):
         """
-    Returns the successor state after the specified agent takes the action.
-    """
+        Returns the successor state after the specified agent takes the action.
+        """
         # Check that successors exist
         if self.isWin() or self.isLose():
             raise Exception('Can\'t generate a successor of a terminal state.')
@@ -124,17 +124,17 @@ class GameState:
 
     def generatePacmanSuccessor(self, action):
         """
-    Generates the successor state after the specified pacman move
-    """
+        Generates the successor state after the specified pacman move
+        """
         return self.generateSuccessor(0, action)
 
     def getPacmanState(self):
         """
-    Returns an AgentState object for pacman (in game.py)
+        Returns an AgentState object for pacman (in game.py)
 
-    state.pos gives the current position
-    state.direction gives the travel vector
-    """
+        state.pos gives the current position
+        state.direction gives the travel vector
+        """
         return self.data.agentStates[0].copy()
 
     def getPacmanPosition(self):
@@ -164,8 +164,8 @@ class GameState:
 
     def getCapsules(self):
         """
-    Returns a list of positions (x,y) of the remaining capsules.
-    """
+        Returns a list of positions (x,y) of the remaining capsules.
+        """
         return self.data.capsules
 
     def getNumFood(self):
@@ -173,26 +173,26 @@ class GameState:
 
     def getFood(self):
         """
-    Returns a Grid of boolean food indicator variables.
+        Returns a Grid of boolean food indicator variables.
 
-    Grids can be accessed via list notation, so to check
-    if there is food at (x,y), just call
+        Grids can be accessed via list notation, so to check
+        if there is food at (x,y), just call
 
-    currentFood = state.getFood()
-    if currentFood[x][y] == True: ...
-    """
+        currentFood = state.getFood()
+        if currentFood[x][y] == True: ...
+        """
         return self.data.food
 
     def getWalls(self):
         """
-    Returns a Grid of boolean wall indicator variables.
+        Returns a Grid of boolean wall indicator variables.
 
-    Grids can be accessed via list notation, so to check
-    if there is food at (x,y), just call
+        Grids can be accessed via list notation, so to check
+        if there is food at (x,y), just call
 
-    walls = state.getWalls()
-    if walls[x][y] == True: ...
-    """
+        walls = state.getWalls()
+        if walls[x][y] == True: ...
+        """
         return self.data.layout.walls
 
     def hasFood(self, x, y):
@@ -214,8 +214,8 @@ class GameState:
 
     def __init__(self, prevState=None):
         """
-    Generates a new state by copying information from its predecessor.
-    """
+        Generates a new state by copying information from its predecessor.
+        """
         if prevState != None:  # Initial state
             self.data = GameStateData(prevState.data)
         else:
@@ -228,14 +228,14 @@ class GameState:
 
     def __eq__(self, other):
         """
-    Allows two states to be compared.
-    """
+        Allows two states to be compared.
+        """
         return self.data == other.data
 
     def __hash__(self):
         """
-    Allows states to be keys of dictionaries.
-    """
+        Allows states to be keys of dictionaries.
+        """
         return hash(self.data)
 
     def __str__(self):
@@ -244,8 +244,8 @@ class GameState:
 
     def initialize(self, layout, numGhostAgents=1000):
         """
-    Creates an initial game state from a layout array (see layout.py).
-    """
+        Creates an initial game state from a layout array (see layout.py).
+        """
         self.data.initialize(layout, numGhostAgents)
 
 
@@ -262,9 +262,9 @@ TIME_PENALTY = 1  # Number of points lost each round
 
 class ClassicGameRules:
     """
-  These game rules manage the control flow of a game, deciding when
-  and how the game starts and ends.
-  """
+    These game rules manage the control flow of a game, deciding when
+    and how the game starts and ends.
+    """
 
     def __init__(self, timeout=30):
         self.timeout = timeout
@@ -287,8 +287,8 @@ class ClassicGameRules:
 
     def process(self, state, game):
         """
-    Checks to see whether it is time to end the game.
-    """
+        Checks to see whether it is time to end the game.
+        """
         if state.isWin(): self.win(state, game)
         if state.isLose(): self.lose(state, game)
 

@@ -14,36 +14,36 @@ import random
 
 class EightPuzzleState:
     """
- The Eight Puzzle is described in the course textbook on
- page 64.
+    The Eight Puzzle is described in the course textbook on
+    page 64.
 
- This class defines the mechanics of the puzzle itself.  The
- task of recasting this puzzle as a search problem is left to
- the EightPuzzleSearchProblem class.
- """
+    This class defines the mechanics of the puzzle itself.  The
+    task of recasting this puzzle as a search problem is left to
+    the EightPuzzleSearchProblem class.
+    """
 
     def __init__(self, numbers):
         """
-     Constructs a new eight puzzle from an ordering of numbers.
+        Constructs a new eight puzzle from an ordering of numbers.
 
-   numbers: a list of integers from 0 to 8 representing an
-     instance of the eight puzzle.  0 represents the blank
-     space.  Thus, the list
+        numbers: a list of integers from 0 to 8 representing an
+        instance of the eight puzzle.  0 represents the blank
+        space.  Thus, the list
 
-       [1, 0, 2, 3, 4, 5, 6, 7, 8]
+        [1, 0, 2, 3, 4, 5, 6, 7, 8]
 
-     represents the eight puzzle:
-       -------------
-       | 1 |   | 2 |
-       -------------
-       | 3 | 4 | 5 |
-       -------------
-       | 6 | 7 | 8 |
-       ------------
+        represents the eight puzzle:
+        -------------
+        | 1 |   | 2 |
+        -------------
+        | 3 | 4 | 5 |
+        -------------
+        | 6 | 7 | 8 |
+        ------------
 
-   The configuration of the puzzle is stored in a 2-dimensional
-   list (a list of lists) 'cells'.
-   """
+        The configuration of the puzzle is stored in a 2-dimensional
+        list (a list of lists) 'cells'.
+        """
         self.cells = []
         numbers = numbers[:]  # Make a copy so as not to cause side-effects.
         numbers.reverse()
@@ -56,22 +56,22 @@ class EightPuzzleState:
 
     def isGoal(self):
         """
-     Checks to see if the puzzle is in its goal state.
+        Checks to see if the puzzle is in its goal state.
 
-       -------------
-       |   | 1 | 2 |
-       -------------
-       | 3 | 4 | 5 |
-       -------------
-       | 6 | 7 | 8 |
-       -------------
+        -------------
+        |   | 1 | 2 |
+        -------------
+        | 3 | 4 | 5 |
+        -------------
+        | 6 | 7 | 8 |
+        -------------
 
-   >>> EightPuzzleState([0, 1, 2, 3, 4, 5, 6, 7, 8]).isGoal()
-   True
+        >>> EightPuzzleState([0, 1, 2, 3, 4, 5, 6, 7, 8]).isGoal()
+        True
 
-   >>> EightPuzzleState([1, 0, 2, 3, 4, 5, 6, 7, 8]).isGoal()
-   False
-   """
+        >>> EightPuzzleState([1, 0, 2, 3, 4, 5, 6, 7, 8]).isGoal()
+        False
+        """
         current = 0
         for row in range(3):
             for col in range(3):
@@ -82,14 +82,14 @@ class EightPuzzleState:
 
     def legalMoves(self):
         """
-     Returns a list of legal moves from the current state.
+        Returns a list of legal moves from the current state.
 
-   Moves consist of moving the blank space up, down, left or right.
-   These are encoded as 'up', 'down', 'left' and 'right' respectively.
+        Moves consist of moving the blank space up, down, left or right.
+        These are encoded as 'up', 'down', 'left' and 'right' respectively.
 
-   >>> EightPuzzleState([0, 1, 2, 3, 4, 5, 6, 7, 8]).legalMoves()
-   ['down', 'right']
-   """
+        >>> EightPuzzleState([0, 1, 2, 3, 4, 5, 6, 7, 8]).legalMoves()
+        ['down', 'right']
+        """
         moves = []
         row, col = self.blankLocation
         if (row != 0):
@@ -104,16 +104,16 @@ class EightPuzzleState:
 
     def result(self, move):
         """
-     Returns a new eightPuzzle with the current state and blankLocation
-   updated based on the provided move.
+        Returns a new eightPuzzle with the current state and blankLocation
+        updated based on the provided move.
 
-   The move should be a string drawn from a list returned by legalMoves.
-   Illegal moves will raise an exception, which may be an array bounds
-   exception.
+        The move should be a string drawn from a list returned by legalMoves.
+        Illegal moves will raise an exception, which may be an array bounds
+        exception.
 
-   NOTE: This function *does not* change the current object.  Instead,
-   it returns a new object.
-   """
+        NOTE: This function *does not* change the current object.  Instead,
+        it returns a new object.
+        """
         row, col = self.blankLocation
         if (move == 'up'):
             newrow = row - 1
@@ -143,13 +143,13 @@ class EightPuzzleState:
     # Utilities for comparison and display
     def __eq__(self, other):
         """
-       Overloads '==' such that two eightPuzzles with the same configuration
-     are equal.
+        Overloads '==' such that two eightPuzzles with the same configuration
+        are equal.
 
-     >>> EightPuzzleState([0, 1, 2, 3, 4, 5, 6, 7, 8]) == \
-         EightPuzzleState([1, 0, 2, 3, 4, 5, 6, 7, 8]).result('left')
-     True
-   """
+        >>> EightPuzzleState([0, 1, 2, 3, 4, 5, 6, 7, 8]) == \
+            EightPuzzleState([1, 0, 2, 3, 4, 5, 6, 7, 8]).result('left')
+        True
+        """
         for row in range(3):
             if self.cells[row] != other.cells[row]:
                 return False
@@ -160,8 +160,8 @@ class EightPuzzleState:
 
     def __getAsciiString(self):
         """
-     Returns a display string for the maze
-   """
+        Returns a display string for the maze
+        """
         lines = []
         horizontalLine = ('-' * (13))
         lines.append(horizontalLine)
@@ -187,7 +187,7 @@ class EightPuzzleSearchProblem(search.SearchProblem):
     Implementation of a SearchProblem for the  Eight Puzzle domain
 
     Each state is represented by an instance of an eightPuzzle.
-  """
+    """
 
     def __init__(self, puzzle):
         "Creates a new EightPuzzleSearchProblem which stores search information."
@@ -201,10 +201,10 @@ class EightPuzzleSearchProblem(search.SearchProblem):
 
     def getSuccessors(self, state):
         """
-      Returns list of (successor, action, stepCost) pairs where
-      each succesor is either left, right, up, or down
-      from the original state and the cost is 1.0 for each
-    """
+        Returns list of (successor, action, stepCost) pairs where
+        each succesor is either left, right, up, or down
+        from the original state and the cost is 1.0 for each
+        """
         succ = []
         for a in state.legalMoves():
             succ.append((state.result(a), a, 1))
@@ -212,11 +212,11 @@ class EightPuzzleSearchProblem(search.SearchProblem):
 
     def getCostOfActions(self, actions):
         """
-      actions: A list of actions to take
+        actions: A list of actions to take
  
-     This method returns the total cost of a particular sequence of actions.  The sequence must
-     be composed of legal moves
-     """
+        This method returns the total cost of a particular sequence of actions.  The sequence must
+        be composed of legal moves
+        """
         return len(actions)
 
 

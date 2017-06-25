@@ -55,18 +55,18 @@ class GoWestAgent(Agent):
 
 class SearchAgent(Agent):
     """
-  This very general search agent finds a path using a supplied search algorithm for a
-  supplied search problem, then returns actions to follow that path.
+    This very general search agent finds a path using a supplied search algorithm for a
+    supplied search problem, then returns actions to follow that path.
   
-  As a default, this agent runs DFS on a PositionSearchProblem to find location (1,1)
+    As a default, this agent runs DFS on a PositionSearchProblem to find location (1,1)
   
-  Options for fn include:
+    Options for fn include:
     depthFirstSearch or dfs
     breadthFirstSearch or bfs
     
   
-  Note: You should NOT change any code in SearchAgent
-  """
+    Note: You should NOT change any code in SearchAgent
+    """
 
     def __init__(self,
                  fn='depthFirstSearch',
@@ -101,12 +101,12 @@ class SearchAgent(Agent):
 
     def registerInitialState(self, state):
         """
-    This is the first time that the agent sees the layout of the game board. Here, we
-    choose a path to the goal.  In this phase, the agent should compute the path to the
-    goal and store it in a local variable.  All of the work is done in this method!
+        This is the first time that the agent sees the layout of the game board. Here, we
+        choose a path to the goal.  In this phase, the agent should compute the path to the
+        goal and store it in a local variable.  All of the work is done in this method!
     
-    state: a GameState object (pacman.py)
-    """
+        state: a GameState object (pacman.py)
+        """
         if self.searchFunction == None:
             raise Exception, "No search function provided for SearchAgent"
         starttime = time.time()
@@ -120,11 +120,11 @@ class SearchAgent(Agent):
 
     def getAction(self, state):
         """
-    Returns the next action in the path chosen earlier (in registerInitialState).  Return
-    Directions.STOP if there is no further action to take.
+        Returns the next action in the path chosen earlier (in registerInitialState).  Return
+        Directions.STOP if there is no further action to take.
     
-    state: a GameState object (pacman.py)
-    """
+        state: a GameState object (pacman.py)
+        """
         if 'actionIndex' not in dir(self): self.actionIndex = 0
         i = self.actionIndex
         self.actionIndex += 1
@@ -136,14 +136,14 @@ class SearchAgent(Agent):
 
 class PositionSearchProblem(search.SearchProblem):
     """
-  A search problem defines the state space, start state, goal test,
-  successor function and cost function.  This search problem can be 
-  used to find paths to a particular point on the pacman board.
+    A search problem defines the state space, start state, goal test,
+    successor function and cost function.  This search problem can be 
+    used to find paths to a particular point on the pacman board.
   
-  The state space consists of (x,y) positions in a pacman game.
+    The state space consists of (x,y) positions in a pacman game.
   
-  Note: this search problem is fully specified; you should NOT change it.
-  """
+    Note: this search problem is fully specified; you should NOT change it.
+    """
 
     def __init__(self,
                  gameState,
@@ -152,12 +152,12 @@ class PositionSearchProblem(search.SearchProblem):
                  start=None,
                  warn=True):
         """
-    Stores the start and goal.  
+         Stores the start and goal.  
     
-    gameState: A GameState object (pacman.py)
-    costFn: A function from a search state (tuple) to a non-negative number
-    goal: A position in the gameState
-    """
+        gameState: A GameState object (pacman.py)
+        costFn: A function from a search state (tuple) to a non-negative number
+        goal: A position in the gameState
+        """
         self.walls = gameState.getWalls()
         self.startState = gameState.getPacmanPosition()
         if start != None: self.startState = start
@@ -190,15 +190,15 @@ class PositionSearchProblem(search.SearchProblem):
 
     def getSuccessors(self, state):
         """
-    Returns successor states, the actions they require, and a cost of 1.
+        Returns successor states, the actions they require, and a cost of 1.
     
-     As noted in search.py:
+        As noted in search.py:
          For a given state, this should return a list of triples, 
-     (successor, action, stepCost), where 'successor' is a 
-     successor to the current state, 'action' is the action
-     required to get there, and 'stepCost' is the incremental 
-     cost of expanding to that successor
-    """
+        (successor, action, stepCost), where 'successor' is a 
+        successor to the current state, 'action' is the action
+        required to get there, and 'stepCost' is the incremental 
+        cost of expanding to that successor
+        """
 
         successors = []
         for action in [
@@ -287,15 +287,15 @@ def euclideanHeuristic(position, problem, info={}):
 
 class CornersProblem(search.SearchProblem):
     """
-  This search problem finds paths through all four corners of a layout.
+    This search problem finds paths through all four corners of a layout.
 
-  You must select a suitable state space and successor function
-  """
+    You must select a suitable state space and successor function
+    """
 
     def __init__(self, startingGameState):
         """
-    Stores the walls, pacman's starting position and corners.
-    """
+        Stores the walls, pacman's starting position and corners.
+        """
         self.walls = startingGameState.getWalls()
         self.startingPosition = startingGameState.getPacmanPosition()
         top, right = self.walls.height - 2, self.walls.width - 2
@@ -319,15 +319,15 @@ class CornersProblem(search.SearchProblem):
 
     def getSuccessors(self, state):
         """
-    Returns successor states, the actions they require, and a cost of 1.
+        Returns successor states, the actions they require, and a cost of 1.
     
-     As noted in search.py:
+        As noted in search.py:
          For a given state, this should return a list of triples, 
-     (successor, action, stepCost), where 'successor' is a 
-     successor to the current state, 'action' is the action
-     required to get there, and 'stepCost' is the incremental 
-     cost of expanding to that successor
-    """
+        (successor, action, stepCost), where 'successor' is a 
+        successor to the current state, 'action' is the action
+        required to get there, and 'stepCost' is the incremental 
+        cost of expanding to that successor
+        """
 
         successors = []
         for action in [
@@ -348,9 +348,9 @@ class CornersProblem(search.SearchProblem):
 
     def getCostOfActions(self, actions):
         """
-    Returns the cost of a particular sequence of actions.  If those actions
-    include an illegal move, return 999999.  This is implemented for you.
-    """
+        Returns the cost of a particular sequence of actions.  If those actions
+        include an illegal move, return 999999.  This is implemented for you.
+        """
         if actions == None: return 999999
         x, y = self.startingPosition
         for action in actions:
@@ -362,17 +362,17 @@ class CornersProblem(search.SearchProblem):
 
 def cornersHeuristic(state, problem):
     """
-  A heuristic for the CornersProblem that you defined.
+    A heuristic for the CornersProblem that you defined.
   
     state:   The current search state 
              (a data structure you chose in your search problem)
     
     problem: The CornersProblem instance for this layout.  
     
-  This function should always return a number that is a lower bound
-  on the shortest path from the state to a goal of the problem; i.e.
-  it should be admissible (as well as consistent).
-  """
+    This function should always return a number that is a lower bound
+    on the shortest path from the state to a goal of the problem; i.e.
+    it should be admissible (as well as consistent).
+    """
     corners = problem.corners  # These are the corner coordinates
     walls = problem.walls  # These are the walls of the maze, as a Grid (game.py)
 
